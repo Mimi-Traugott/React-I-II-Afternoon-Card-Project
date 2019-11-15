@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import CardInfo from "./CardInfo"
 import './App.css';
+import cardsData from './data'
+import Button from './Button'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      currentCardIndex: 0,
+      cardsLength: cardsData.length
+    }
+    this.changeCard = this.changeCard.bind(this)
+  }
+
+  changeCard(cardDirection) {
+    const nextCardIndex = this.state.currentCardIndex + 1
+    const previousCardIndex = this.state.currentCardIndex - 1
+    // const newCardIndex = cardDirection === "Next" ? nextCardIndex : previousCardIndex
+    let newCardIndex
+    if (cardDirection === "Next") {
+      newCardIndex = nextCardIndex
+    } else {
+      newCardIndex = previousCardIndex
+    }
+    if (newCardIndex < 0) {
+      newCardIndex = this.state.cardsLength - 1
+    } else if (newCardIndex >= this.state.cardsLength) {
+      newCardIndex = 0
+    }
+
+    this.setState({ currentCardIndex: newCardIndex })
+  }
+  render() {
+    return (<div>
+      <CardInfo
+        cardsLength={this.state.cardsLength}
+        card={cardsData[this.state.currentCardIndex]}
+        currentCardIndex={this.state.currentCardIndex}
+      />
+      <div>
+        <Button
+          onClick={this.changeCard}
+          direction="Next"
+        />
+        <Button
+          onClick={this.changeCard}
+          direction="Previous"
+        />
+      </div>
+    </div>)
+  }
 }
+
+//componentdidmount later
+
 
 export default App;
