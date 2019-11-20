@@ -6,7 +6,7 @@ function Button (props){
     return (<div>
 
         <button 
-        onClick={ () => props.onClick(props.direction)}
+        onClick={ () => props.changeCard(props.direction)}
         >
         {buttonText}
         </button>

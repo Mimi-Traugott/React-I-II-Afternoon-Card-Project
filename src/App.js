@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import CardInfo from "./CardInfo"
+import Card from "./CardInfo";
 import './App.css';
-import cardsData from './data'
-import Button from './Button'
+import cardsData from './data';
+import Button from './Button';
 
 class App extends Component {
   constructor() {
@@ -19,7 +19,7 @@ class App extends Component {
     const nextCardIndex = this.state.currentCardIndex + 1
     const previousCardIndex = this.state.currentCardIndex - 1
     // const newCardIndex = cardDirection === "Next" ? nextCardIndex : previousCardIndex
-    let newCardIndex
+    let newCardIndex;
     if (cardDirection === "Next") {
       newCardIndex = nextCardIndex
     } else {
@@ -30,23 +30,24 @@ class App extends Component {
     } else if (newCardIndex >= this.state.cardsLength) {
       newCardIndex = 0
     }
-
     this.setState({ currentCardIndex: newCardIndex })
   }
+
   render() {
-    return (<div>
-      <CardInfo
+    return (
+    <div>
+      <Card
         cardsLength={this.state.cardsLength}
         card={cardsData[this.state.currentCardIndex]}
         currentCardIndex={this.state.currentCardIndex}
       />
       <div>
         <Button
-          onClick={this.changeCard}
+          changeCard={this.changeCard}
           direction="Next"
         />
         <Button
-          onClick={this.changeCard}
+          changeCard={this.changeCard}
           direction="Previous"
         />
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CardInfo (props) {
+function Card (props) {
 return (<div>
     <div>
         <div>
@@ -29,4 +29,4 @@ return (<div>
 )
 }
 
-export default CardInfo
+export default Card;
